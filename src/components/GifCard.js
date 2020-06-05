@@ -8,6 +8,7 @@ class GifCard extends Component {
                     <img
                     src={this.props.src}
                     alt={"GIF"}
+                        style={{ width: 20 + "rem", height: 20 + "rem"}}
                     ></img>
                 </div>
             </div>
