@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import axios from "axios";
 
 class GifCard extends Component {
     render() {
         return (
-            <>
-                <div>
-
+            <div className="card" style={{ width: 25 + "rem" }}>
+                <div className="card-body text-center">
+                    <img
+                    src={this.props.src}
+                    alt={"GIF"}
+                    ></img>
                 </div>
-            </>
+            </div>
         )
     }
 }
