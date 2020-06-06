@@ -5,7 +5,11 @@ class GifCard extends Component {
     return (
       <div className="card" style={{ width: 25 + "rem" }}>
         <div className="card-body text-center">
-          <img src={this.props.src} alt={"GIF"}></img>
+          <img
+            src={this.props.src}
+            alt={"GIF"}
+            style={{ width: 20 + "rem", height: 20 + "rem" }}
+          ></img>
         </div>
       </div>
     );
