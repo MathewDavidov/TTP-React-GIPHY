@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import axios from "axios";
 import SearchField from "./components/SearchField";
 import GifCard from "./components/GifCard";
-import './App.css';
+import "./App.css";
 
 const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
 const API_TRENDING_URI = `http://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}`;
@@ -28,8 +28,8 @@ class App extends Component {
       })
       .catch((error) => {
         console.log(error);
-    });
-  }
+      });
+  };
 
   render() {
     return (
@@ -39,11 +39,11 @@ class App extends Component {
             <span className="navbar-text text-white">GIPHY Search</span>
           </nav>
           <div className="container">
-
+            <GifCard />
           </div>
         </div>
       </>
-    )
+    );
   }
 }
 
