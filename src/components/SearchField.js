@@ -16,9 +16,13 @@ class SearchField extends Component {
         this.props.search(e.target.value);
     }
 
+    handleSubmit = () => {
+        this.props.random();
+    }
+
     render() {
         return (
-            <>
+            <div className="jumbotron">
                 <div>
                     <label htmlFor="search">Search GIFS</label><br/>
                     <input
@@ -26,7 +30,10 @@ class SearchField extends Component {
                     onChange={this.handleChange}
                     ></input>
                 </div>
-            </>
+                <div>
+                    <input type="submit" value="Random GIF" onClick={this.handleSubmit}></input>
+                </div>
+            </div>
         )
     }
 }

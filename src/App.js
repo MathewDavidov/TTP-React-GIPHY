@@ -11,8 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchInput: "",
-      results: []
+      results: [],
+      random: ""
     };
   }
 
@@ -39,11 +39,53 @@ class App extends Component {
   }
 
   search = (searchInput) => {
-    const API_URI = `http://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${API_KEY}&limit=10`
-    this.fetchAPIData(API_URI);
+    if (searchInput.length >= 1) {
+      const API_URI = `http://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${API_KEY}&limit=10`
+      this.fetchAPIData(API_URI);
+    }
+  }
+
+  random = () => {
+    const API_URI = `http://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
+    axios
+      .get(API_URI)
+      .then((response) => {
+        const data = response.data.data;
+        this.setState({
+          random: data
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({
+          random: ""
+        })
+      });
   }
 
   render() {
+    let resultsArr = [];
+    if (this.state.random.length !== 0) {
+      resultsArr = (
+        <div className="col-md-4">
+          <GifCard
+            src={this.state.random.images.original.url}
+          />
+        </div>
+      )
+    } else {
+      resultsArr = (
+        <div className="col-md-4">
+          {this.state.results.map((obj) => (
+            <GifCard
+              src={obj.images.original.url}
+              key={obj.id}
+            />
+          ))}
+        </div>
+      )
+    }
+
     return (
       <>
         <div className>
@@ -51,20 +93,13 @@ class App extends Component {
             <span className="navbar-text text-white">GIPHY Search</span>
           </nav>
           <div className="container">
-            <SearchField search={this.search}
+            <SearchField search={this.search} random={this.random}
             />
           </div>
 
           <div className="container">
             <div className="row justify-content-center">
-              <div className="col-md-4">
-                {this.state.results.map((obj) => (
-                  <GifCard 
-                  src={obj.images.original.url}
-                  key={obj.id}
-                  />
-                ))}
-              </div>
+              {resultsArr}
             </div>
           </div>
         </div>
