@@ -27,13 +27,15 @@ class App extends Component {
         const data = response.data.data;
         console.log(data);
         this.setState({
-          results: response.data.data
+          results: data,
+          random: ""
         })
       })
       .catch((error) => {
         console.log(error);
         this.setState({
-          results: []
+          results: [],
+          random: ""
         })
     });
   }
